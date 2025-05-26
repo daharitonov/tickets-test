@@ -40,6 +40,6 @@ export const listTickets = async (req: Request, res: Response) => {
 };
 
 export const cancelAllInProgressTickets = async (req: Request, res: Response) => {
-  const result = await TicketService.bulkCancelInProgress();
-  res.json({ cancelled: result.affected ?? 0 });
+  const count = await TicketService.bulkCancelInProgress();
+  res.json({ cancelled: count });
 };

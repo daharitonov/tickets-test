@@ -58,3 +58,15 @@ export const cancelAllInProgressTickets = async () => {
   }
   return tickets.length;
 };
+
+export const bulkCancelInProgress = async () => {
+  
+  const result = await AppDataSource
+  .createQueryBuilder()
+  .update(Ticket)
+  .set({ status: 'cancelled', cancellationReason: 'Auto-cancelled' })
+  .where("status = :status", { status: 'in_progress' })
+  .execute();
+  
+  return result.affected ?? 0
+};
