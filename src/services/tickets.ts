@@ -1,6 +1,6 @@
 import { AppDataSource } from '../typeorm/data-source';
 import { Ticket } from '../typeorm/entities/Ticket';
-import { Between } from 'typeorm';
+import { Between, FindOptionsWhere } from 'typeorm';
 
 export const createTicket = async (subject: string, message: string) => {
   const ticket = new Ticket();
@@ -35,7 +35,7 @@ export const cancelTicket = async (id: number, reason: string) => {
 };
 
 export const listTickets = async (date?: string, startDate?: string, endDate?: string) => {
-  let where: any = {};
+  let where: FindOptionsWhere<Ticket> = {};
   if (date) {
     const d = new Date(date);
     const start = new Date(d);
