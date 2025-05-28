@@ -85,7 +85,7 @@ export const listTickets = async (req: Request, res: Response) => {
   }
 
   const { date, startDate, endDate } = result.data;
-  const tickets = await TicketService.listTickets(date as string, startDate as string, endDate as string);
+  const tickets = await TicketService.listTickets(date?.toISOString(), startDate?.toISOString(), endDate?.toISOString());
   res.json(tickets);
 };
 
